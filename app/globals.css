@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette */
+  --color-cream: #fffefa;
+  --color-accent: #bb0a21;
+  --color-accent-dark: #970817;
+  --color-ink: #14110f;
+  --color-charcoal: #2a2522;
+  --color-slate: #57514c;
+  --color-muted: #8a827b;
+  --color-line: #ece7df;
+  --color-line-strong: #ddd6cb;
+  --color-surface: #faf8f2;
+
+  /* Typography */
+  --font-heading: var(--font-ubuntu), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Radii */
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-charcoal);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: color-mix(in srgb, var(--color-accent) 18%, transparent);
+  color: var(--color-ink);
+}
+
+/* Reusable utility: subtle dotted grid backdrop for abstract system visuals */
+.bg-grid {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    color-mix(in srgb, var(--color-ink) 9%, transparent) 1px,
+    transparent 0
+  );
+  background-size: 22px 22px;
+}
+
+.focus-ring {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-accent);
+}
