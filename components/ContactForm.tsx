@@ -9,11 +9,35 @@ const inputClass =
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // EDIT: wire this to your backend / email service / CRM.
-    setSubmitted(true);
+    setSubmitting(true);
+    setError(null);
+
+    const formData = new FormData(e.currentTarget);
+    const payload = Object.fromEntries(formData.entries());
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.error ?? "Something went wrong. Please try again.");
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   if (submitted) {
@@ -116,8 +140,16 @@ export default function ContactForm() {
         />
       </div>
 
+      {error && (
+        <p role="alert" className="mt-4 text-sm text-red-600">
+          {error}
+        </p>
+      )}
+
       <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <Button type="submit">Book a Consultation</Button>
+        <Button type="submit" disabled={submitting}>
+          {submitting ? "Sending…" : "Book a Consultation"}
+        </Button>
         <p className="text-xs text-muted">
           We&apos;ll reply within one business day.
         </p>
