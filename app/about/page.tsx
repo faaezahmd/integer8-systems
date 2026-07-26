@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Container from "@/components/Container";
 import PageHeader from "@/components/PageHeader";
-import Founder from "@/components/Founder";
 import CTA from "@/components/CTA";
 import SectionHeading from "@/components/SectionHeading";
 import { whyPoints } from "@/lib/content";
@@ -45,7 +44,6 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <Founder />
       <CTA />
     </>
   );
