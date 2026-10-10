@@ -49,6 +49,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${ubuntu.variable} ${inter.variable} ${interTight.variable} ${plexMono.variable}`}>
+      <head>
+        <link rel="preload" href="/fonts/sentient/Sentient-500.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+      </head>
       <body className="flex min-h-screen flex-col bg-cream text-charcoal">
         <a
           href="#main"
