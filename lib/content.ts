@@ -118,6 +118,8 @@ export type CaseStudy = {
   challenge: string;
   approach: string;
   result: string;
+  /** Optional shorter result line for the homepage card (max 2 lines). */
+  cardResult?: string;
   metrics: { label: string; value: string }[];
 };
 
@@ -150,6 +152,8 @@ export const caseStudies: CaseStudy[] = [
       "Built LedgerSort: an AI-powered categorization layer with confidence thresholds and human review for low-certainty matches.",
     result:
       "Routine categorization handled automatically, with people focused only on the exceptions.",
+    cardResult:
+      "Routine categorization runs automatically. People review only the exceptions.",
     metrics: [
       { label: "Categorization time", value: "−80%" },
       { label: "Consistency", value: "Standardized" },

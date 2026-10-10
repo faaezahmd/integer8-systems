@@ -100,7 +100,7 @@ export default function HomePage() {
                     <b>{c.tag}</b> · {c.client}
                   </div>
                   <h3>{c.title}</h3>
-                  <p>{c.result}</p>
+                  <p>{c.cardResult ?? c.result}</p>
                   <div className="big">
                     <span>{first.label}</span>
                     <b>{first.value}</b>
