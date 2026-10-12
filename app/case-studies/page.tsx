@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import Container from "@/components/Container";
-import PageHeader from "@/components/PageHeader";
-import CaseStudyCard from "@/components/CaseStudyCard";
-import CTA from "@/components/CTA";
+import PageHero from "@/components/i8/PageHero";
+import CtaBlock from "@/components/i8/CtaBlock";
 import { caseStudies } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -13,34 +11,56 @@ export const metadata: Metadata = {
 
 export default function CaseStudiesPage() {
   return (
-    <>
-      <PageHeader
+    <div className="i8">
+      <PageHero
         eyebrow="Case Studies"
         title="Work that ties out"
         intro="A closer look at engagements where we consolidated systems, automated the manual work and gave finance teams numbers they can trust."
       />
 
-      <section className="py-20 sm:py-24">
-        <Container>
-          <div className="grid gap-6 md:grid-cols-2">
+      <section className="s bt">
+        <div className="wrap">
+          <div className="cs-list">
             {caseStudies.map((study, i) => (
-              <CaseStudyCard
-                key={study.slug}
-                study={study}
-                detailed
-                className={
-                  i === caseStudies.length - 1 &&
-                  caseStudies.length % 2 === 1
-                    ? "md:col-span-2"
-                    : ""
-                }
-              />
+              <article key={study.slug} className="cs">
+                <div className="cs-head">
+                  <span className="cs-n">{String(i + 1).padStart(2, "0")}</span>
+                  <div className="tag">
+                    <b>{study.tag}</b> · {study.client}
+                  </div>
+                  <h2>{study.title}</h2>
+                </div>
+                <div className="cs-body">
+                  <dl className="cs-text">
+                    <div>
+                      <dt>Challenge</dt>
+                      <dd>{study.challenge}</dd>
+                    </div>
+                    <div>
+                      <dt>Approach</dt>
+                      <dd>{study.approach}</dd>
+                    </div>
+                    <div>
+                      <dt>Result</dt>
+                      <dd>{study.result}</dd>
+                    </div>
+                  </dl>
+                  <dl className="cs-metrics">
+                    {study.metrics.map((m) => (
+                      <div key={m.label}>
+                        <dt>{m.label}</dt>
+                        <dd>{m.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              </article>
             ))}
           </div>
-        </Container>
+        </div>
       </section>
 
-      <CTA />
-    </>
+      <CtaBlock />
+    </div>
   );
 }

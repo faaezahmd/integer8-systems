@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import Container from "@/components/Container";
-import PageHeader from "@/components/PageHeader";
-import CTA from "@/components/CTA";
-import SectionHeading from "@/components/SectionHeading";
+import PageHero from "@/components/i8/PageHero";
+import CtaBlock from "@/components/i8/CtaBlock";
 import { whyPoints } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -13,38 +11,38 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <>
-      <PageHeader
+    <div className="i8">
+      <PageHero
         eyebrow="About"
         title="A boutique consultancy where finance meets engineering"
         intro="Integer8 Systems exists to close the gap between how finance teams work and the systems meant to support them — with practical, well-built solutions."
       />
 
-      <section className="py-20 sm:py-24">
-        <Container>
-          <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-            <SectionHeading
-              eyebrow="How we work"
-              title="Practical, finance-first, built to last"
-              intro="We keep engagements small, senior and outcome-focused. The result is systems your team understands and can run on its own."
-            />
-            <div className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
-              {whyPoints.map((point) => (
-                <div key={point.title} className="bg-cream p-6">
-                  <h3 className="font-heading text-base font-medium text-ink">
-                    {point.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate">
-                    {point.body}
-                  </p>
-                </div>
-              ))}
+      <section className="s dark">
+        <div className="wrap about-g">
+          <div className="sh sh-col">
+            <div>
+              <span className="eb">How we work</span>
+              <h2>Practical, finance-first, built to last</h2>
+              <p>
+                We keep engagements small, senior and outcome-focused. The
+                result is systems your team understands and can run on its own.
+              </p>
             </div>
           </div>
-        </Container>
+          <div className="pgrid">
+            {whyPoints.map((point, i) => (
+              <div key={point.title} className="pcell">
+                <span className="mono pn">{String(i + 1).padStart(2, "0")}</span>
+                <h3>{point.title}</h3>
+                <p>{point.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
-      <CTA />
-    </>
+      <CtaBlock />
+    </div>
   );
 }

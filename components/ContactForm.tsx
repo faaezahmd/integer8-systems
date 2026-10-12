@@ -1,11 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "./Button";
 import { services } from "@/lib/content";
 
-const inputClass =
-  "w-full rounded-lg border border-line-strong bg-cream px-4 py-2.5 text-sm text-ink placeholder:text-muted focus-ring focus-visible:border-accent";
+const inputClass = "cf-in";
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -44,12 +42,12 @@ export default function ContactForm() {
     return (
       <div
         role="status"
-        className="rounded-2xl border border-line bg-surface p-8 text-center"
+        className="cf cf-done"
       >
-        <h3 className="font-heading text-xl font-medium text-ink">
+        <h3>
           Thanks — message received.
         </h3>
-        <p className="mt-2 text-sm leading-relaxed text-slate">
+        <p>
           We&apos;ll get back to you within one business day to schedule your
           consultation.
         </p>
@@ -60,12 +58,12 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-2xl border border-line bg-cream p-6 shadow-sm sm:p-8"
+      className="cf"
       noValidate
     >
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div className="flex flex-col gap-2">
-          <label htmlFor="name" className="text-sm font-medium text-ink">
+      <div className="cf-grid">
+        <div className="cf-f">
+          <label htmlFor="name">
             Name
           </label>
           <input
@@ -79,8 +77,8 @@ export default function ContactForm() {
           />
         </div>
 
-        <div className="flex flex-col gap-2">
-          <label htmlFor="email" className="text-sm font-medium text-ink">
+        <div className="cf-f">
+          <label htmlFor="email">
             Email
           </label>
           <input
@@ -94,8 +92,8 @@ export default function ContactForm() {
           />
         </div>
 
-        <div className="flex flex-col gap-2">
-          <label htmlFor="company" className="text-sm font-medium text-ink">
+        <div className="cf-f">
+          <label htmlFor="company">
             Company
           </label>
           <input
@@ -108,8 +106,8 @@ export default function ContactForm() {
           />
         </div>
 
-        <div className="flex flex-col gap-2">
-          <label htmlFor="service" className="text-sm font-medium text-ink">
+        <div className="cf-f">
+          <label htmlFor="service">
             What can we help with?
           </label>
           <select id="service" name="service" className={inputClass} defaultValue="">
@@ -126,8 +124,8 @@ export default function ContactForm() {
         </div>
       </div>
 
-      <div className="mt-5 flex flex-col gap-2">
-        <label htmlFor="message" className="text-sm font-medium text-ink">
+      <div className="cf-f cf-full">
+        <label htmlFor="message">
           Message
         </label>
         <textarea
@@ -141,16 +139,16 @@ export default function ContactForm() {
       </div>
 
       {error && (
-        <p role="alert" className="mt-4 text-sm text-red-600">
+        <p role="alert" className="cf-err">
           {error}
         </p>
       )}
 
-      <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <Button type="submit" disabled={submitting}>
+      <div className="cf-foot">
+        <button className="btn btn-red" type="submit" disabled={submitting}>
           {submitting ? "Sending…" : "Book a Consultation"}
-        </Button>
-        <p className="text-xs text-muted">
+        </button>
+        <p className="cf-note">
           We&apos;ll reply within one business day.
         </p>
       </div>

@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import Container from "@/components/Container";
-import PageHeader from "@/components/PageHeader";
-import ServiceCard from "@/components/ServiceCard";
-import CTA from "@/components/CTA";
+import PageHero from "@/components/i8/PageHero";
+import CtaBlock from "@/components/i8/CtaBlock";
 import { services } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -11,26 +9,37 @@ export const metadata: Metadata = {
     "Odoo implementation, accounting automation, QuickBooks integrations, Stripe reconciliation, ERP consulting and AI-powered finance workflows.",
 };
 
+const num = (i: number) => String(i + 1).padStart(2, "0");
+
 export default function ServicesPage() {
   return (
-    <>
-      <PageHeader
+    <div className="i8">
+      <PageHero
         eyebrow="Services"
         title="Finance systems work, end to end"
         intro="Focused engagements that implement, connect and automate the systems your finance team depends on — built to be maintained, not just delivered."
       />
 
-      <section className="py-20 sm:py-24">
-        <Container>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => (
-              <ServiceCard key={service.slug} service={service} showDetails />
+      <section className="s bt">
+        <div className="wrap">
+          <div className="grid3">
+            {services.map((service, i) => (
+              <article key={service.slug} className="svc svc-d">
+                <div className="n">{num(i)}</div>
+                <h3>{service.title}</h3>
+                <p>{service.details}</p>
+                <ul className="olist">
+                  {service.outcomes.map((o) => (
+                    <li key={o}>{o}</li>
+                  ))}
+                </ul>
+              </article>
             ))}
           </div>
-        </Container>
+        </div>
       </section>
 
-      <CTA />
-    </>
+      <CtaBlock />
+    </div>
   );
 }

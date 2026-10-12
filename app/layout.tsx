@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { ubuntu, inter } from "./fonts";
+import { ubuntu, inter, interTight, plexMono } from "./fonts";
 import { site } from "@/lib/content";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "./globals.css";
+import "./redesign.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://integer8systems.com"),
@@ -47,7 +48,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${ubuntu.variable} ${inter.variable}`}>
+    <html lang="en" className={`${ubuntu.variable} ${inter.variable} ${interTight.variable} ${plexMono.variable}`}>
+      <head>
+        <link rel="preload" href="/fonts/sentient/Sentient-500.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+      </head>
       <body className="flex min-h-screen flex-col bg-cream text-charcoal">
         <a
           href="#main"
